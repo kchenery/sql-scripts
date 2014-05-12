@@ -167,7 +167,7 @@ BEGIN;
             
             SELECT @CaptureInstance, @ColumnName, @ColumnDataType, @ColumnOrdinal
 
-            SELECT @SQL = 'ALTER TABLE [cdc].[' + @CaptureInstance + '_CT] ADD [' + @ColumnName + '] ' + @ColumnDataType + ' NULL';
+            SELECT @SQL = 'ALTER TABLE ' + QUOTENAME(OBJECT_SCHEMA_NAME(@OriginalCDCObjectID)) + '.' + QUOTENAME(OBJECT_NAME(@OriginalCDCObjectID)) + ' ADD [' + @ColumnName + '] ' + @ColumnDataType + ' NULL';
             PRINT @SQL;
             EXEC(@SQL);
 
