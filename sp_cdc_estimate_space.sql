@@ -29,11 +29,19 @@ Output:
 ...
 */
 BEGIN;
-    DECLARE @Update1	INT;
-    DECLARE @Update2	INT;
-    DECLARE @Time		NVARCHAR(100);
-    DECLARE @AvgRowSize	NUMERIC(20, 10);
+    DECLARE @Update1	    INT;
+    DECLARE @Update2	    INT;
+    DECLARE @Time		    NVARCHAR(100);
+    DECLARE @AvgRowSize	    NUMERIC(20, 10);
+    DECLARE @ErrorMessage   NVARCHAR(1000);
 
+    IF NOT EXISTS(SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(@TableName))
+    BEGIN;
+        SET @ErrorMessage = 'Unable to locate ' + @TableName;
+        THROW 50000, @ErrorMessage, 1;
+
+        RETURN;
+    END;
 
     SELECT @Time = 
         RIGHT('00' + CAST(@SampleTime / (60 * 60)											AS NVARCHAR(100)), 2)
@@ -76,10 +84,11 @@ BEGIN;
 
 
     SELECT 
-        @Update2 - @Update1													AS NumOfUpdates
+        @Time																AS SampleTime
+		,@Update2 - @Update1												AS NumOfUpdates
         ,@AvgRowSize														AS AvgRowSizeMB
-        ,@AvgRowSize * (@Update2 - @Update1) * (3600 / @SampleTime)			AS EstMBPerHour
-        ,24 * @AvgRowSize * (@Update2 - @Update1) * (3600 / @SampleTime)	AS EstMBPerDay
+        ,CAST(@AvgRowSize * (@Update2 - @Update1) * (3600 / @SampleTime) AS NUMERIC(20, 2))			AS EstMBPerHour
+		,CAST(24 * @AvgRowSize * (@Update2 - @Update1) * (3600 / @SampleTime) AS NUMERIC(20, 2))	AS EstMBPerDay
 
 END;
 GO
