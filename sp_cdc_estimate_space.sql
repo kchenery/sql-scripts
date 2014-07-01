@@ -8,7 +8,7 @@ END;
 GO
 
 ALTER PROCEDURE sp_cdc_estimate_space
-    @ObjectName		NVARCHAR(128)
+    @TableName		NVARCHAR(128)
     ,@SampleTime	INT	= 300	/* Default = 5 mins */
 AS
 /*
@@ -18,14 +18,14 @@ Description:    Uses index stats information to calculate space requirements for
                 average row size to calculate requirements per hour and per day.
 
 Parameters:
- - ObjectName:  Name of the object you want to create CDC against
- - SampleTime:	Number of seconds to sample - longer = more accurate.  Default = 5mins
+ - TableName:   Name of the object you want to create CDC against
+ - SampleTime:  Number of seconds to sample - longer = more accurate.  Default = 5mins
 
 Output:
- - NumOfUpdates:	Number of updates that occurred against @ObjectName in the @SampleTime period
- - AvgRowSizeMB:	Average row size in MB
- - EstMBPerHour:	Estimated MB required for an hour of CDC
- - EstMBPerDay:		Estimated MB required for a day of CDC
+ - NumOfUpdates:    Number of updates that occurred against @TableName in the @SampleTime period
+ - AvgRowSizeMB:    Average row size in MB
+ - EstMBPerHour:    Estimated MB required for an hour of CDC
+ - EstMBPerDay:     Estimated MB required for a day of CDC
 ...
 */
 BEGIN;
