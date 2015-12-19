@@ -1,13 +1,4 @@
-﻿USE [master];
-GO
-
-IF NOT EXISTS(SELECT 1 FROM sys.procedures WHERE object_id = OBJECT_ID('dbo.sp_helpfile2'))
-BEGIN;
-	EXEC('CREATE PROCEDURE sp_helpfile2 AS SELECT ''Procedure Stub''');
-END;
-GO
-
-ALTER PROCEDURE sp_helpfile2
+﻿CREATE PROCEDURE [dbo].[sp_helpfile2]
 AS
 /*
 ---
@@ -44,7 +35,4 @@ BEGIN
 	FROM
 		sys.database_files
 END;
-GO
-
-EXEC sys.sp_MS_marksystemobject 'sp_helpfile2'
 GO
