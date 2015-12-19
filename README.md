@@ -11,4 +11,5 @@ The procedures can be installed by deploying the Master.DB.Extensions project.  
 | [sp_foreignkeys2](Master.DB.Extensions/Master.DB.Extensions/dbo/Procedures/sp_foreignkeys2.sql) | Reports foreign key information about the supplied table.  A little bit easier to read/consume than the sp_help output IMHO |
 | [sp_helpfile2](Master.DB.Extensions/Master.DB.Extensions/dbo/Procedures/sp_helpfile2.sql) | Alternative to sp_helpfile.  Adds size information to the output |
 | [sp_helpindex2](Master.DB.Extensions/Master.DB.Extensions/dbo/Procedures/sp_helpindex2.sql) | Alternative to sp_helpindex.  Provides the include columns in the output and index usage statistics |
+| [sp_trust_foreignkeys](Master.DB.Extensions/Master.DB.Extensions/dbo/Procedures/sp_trust_foreignkeys.sql) | Steps over non trusted foreign keys and runs ALTER TABLE...WITH CHECK CHECK against them |
 | [sp_useroptions](Master.DB.Extensions/Master.DB.Extensions/dbo/Procedures/sp_useroptions.sql) | Decodes the @@options values into a table |
