@@ -1,0 +1,11 @@
+# top-most EditorConfig file
+root = true
+
+[*]
+end_of_line = crlf
+insert_final_newline = false
+
+# 4 space indentation
+[*.sql]
+indent_style = tab
+trim_trailing_whitespace = true

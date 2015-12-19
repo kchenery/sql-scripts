@@ -1,13 +1,4 @@
-USE [master]
-GO
-
-IF NOT EXISTS(SELECT 1 FROM sys.procedures WHERE object_id = OBJECT_ID('dbo.sp_useroptions'))
-BEGIN;
-    EXEC('CREATE PROCEDURE sp_useroptions AS SELECT ''ProcedureStub'' AS Stub;');
-END;
-GO
-
-ALTER PROCEDURE sp_useroptions
+﻿CREATE PROCEDURE [dbo].[sp_useroptions]
 AS
 /*
 ---
@@ -38,7 +29,4 @@ BEGIN;
 		,(@@OPTIONS & 8192) / 8192		AS NUMERIC_ROUNDABORT
 		,(@@OPTIONS & 16384) / 16384	AS XACT_ABORT
 END;
-GO
-
-EXEC sys.sp_MS_marksystemobject 'sp_useroptions'
 GO
