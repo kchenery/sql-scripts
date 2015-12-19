@@ -6,5 +6,7 @@
     <DeployScriptFileName>Master.DB.Extensions.sql</DeployScriptFileName>
     <TargetConnectionString>Data Source=localhost;Integrated Security=True;Pooling=False</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
+    <BlockOnPossibleDataLoss>True</BlockOnPossibleDataLoss>
+    <ScriptDatabaseOptions>False</ScriptDatabaseOptions>
   </PropertyGroup>
 </Project>

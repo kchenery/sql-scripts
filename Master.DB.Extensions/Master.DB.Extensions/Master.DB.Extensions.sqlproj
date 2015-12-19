@@ -77,6 +77,7 @@
     <Build Include="dbo\Procedures\sp_useroptions.sql" />
     <Build Include="dbo\Procedures\sp_foreignkeys2.sql" />
     <Build Include="dbo\Procedures\sp_cdc_estimate_space.sql" />
+    <Build Include="dbo\Procedures\sp_trust_foreignkeys.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\Post Deploy\MarkAsSystemObjects.sql" />
