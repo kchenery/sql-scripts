@@ -40,6 +40,8 @@ BEGIN;
 		,IncludeList.IncludeColumns AS IncludeColumns
 		,i.filter_definition        AS Filter
 		,i.fill_factor              AS [FillFactor]
+		,size.UsedSizeMB            AS UsedSizeMB
+		,size.ReservedSizeMB        AS ReservedSizeMB
 		,stat.user_seeks			AS [UserSeeks]
 		,stat.user_scans			AS [UserScans]
 		,stat.user_lookups			AS [UserLookups]
@@ -58,6 +60,16 @@ BEGIN;
 		LEFT OUTER JOIN sys.partitions AS p			/* Needs to be OUTER JOIN as disabled indexes have no reference here */
 			ON i.object_id = p.object_id
 			AND i.index_id = p.index_id
+		CROSS APPLY (
+			SELECT
+				CAST((SUM(ps.used_page_count) * 8 / 1024.0) AS DECIMAL(19, 2))          AS UsedSizeMB
+				,CAST((SUM(ps.reserved_page_count) * 8 / 1024.0) AS DECIMAL(19, 2))     AS ReservedSizeMB
+			FROM
+				sys.dm_db_partition_stats AS ps
+			WHERE
+				ps.object_id = i.object_id
+			AND ps.index_id = i.index_id
+		) AS size
 		CROSS APPLY (
 			SELECT (
 				STUFF(( SELECT ', ' + c.name

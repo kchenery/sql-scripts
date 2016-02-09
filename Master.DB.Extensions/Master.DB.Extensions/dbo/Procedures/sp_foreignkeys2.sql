@@ -10,7 +10,7 @@ Parameters:
 				will return data for all foreign keys in the database.
 
 Output:
- - Similar information to sp_helpindex2.  Extra columns are Include list and any filter information.
+ - Similar information to sp_helpindex2.
 ...
 */
 BEGIN;
